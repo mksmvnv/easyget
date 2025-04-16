@@ -1,8 +1,8 @@
 from decimal import Decimal
 
-from core.utils.currency import get_exchange_rates
+from utils.currency import get_exchange_rates
 
-from core.data.config import settings
+from data.config import settings
 
 
 async def calculator(product: int, logistics: int) -> Decimal:

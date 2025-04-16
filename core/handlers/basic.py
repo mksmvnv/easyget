@@ -8,14 +8,14 @@ from aiogram.filters import CommandStart, Command
 from aiogram.utils.markdown import hbold, hcode, hitalic
 from aiogram.fsm.context import FSMContext
 
-from core.filters.admin import Admin
-from core.keyboards import inline
-from core.keyboards.reply import main_menu_keyboard
-from core.utils.states import Calculation, Order
-from core.utils.calculator import calculator
-from core.utils.currency import get_exchange_rates
-from core.utils.enums import Menu
-from core.data.config import settings
+from filters.admin import Admin
+from keyboards import inline
+from keyboards.reply import main_menu_keyboard
+from utils.states import Calculation, Order
+from utils.calculator import calculator
+from utils.currency import get_exchange_rates
+from utils.enums import Menu
+from data.config import settings
 
 
 router = Router()

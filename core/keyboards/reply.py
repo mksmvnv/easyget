@@ -1,6 +1,6 @@
 from aiogram.utils.keyboard import ReplyKeyboardBuilder
 
-from core.utils.enums import Menu
+from utils.enums import Menu
 
 
 def main_menu_keyboard():

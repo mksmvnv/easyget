@@ -2,7 +2,7 @@ import aiohttp
 
 from decimal import Decimal
 
-from core.data.config import settings
+from data.config import settings
 
 
 async def get_exchange_rates() -> Decimal:
