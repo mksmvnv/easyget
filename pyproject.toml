@@ -1,0 +1,19 @@
+[tool.poetry]
+name = "easyget"
+version = "0.1.0"
+description = ""
+authors = ["Maksim <mksmvnv@icloud.com>"]
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.12"
+black = "^25.1.0"
+aiogram = "^3.20.0"
+pydantic-settings = "^2.8.1"
+pyyaml = "^6.0.2"
+aiohttp = "^3.11.16"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"

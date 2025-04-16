@@ -1,0 +1,15 @@
+personal:
+  token: "6856910898:AAFG4oAeqit9l9dv0YROJJHdpLp3VJN5IpM"
+  admin_id: 714689915
+
+logistics:
+  sneakers: 1000
+  jackets: 800
+  other: 800
+  china: 300
+  fee: 500
+
+links:
+  api: "https://api.currencyapi.com/v3/latest?apikey=cur_live_9TBAwIs26bCoO1tz7y9hoTzjtrGgrVgDDK2iHeC2"
+  main_url: "https://vk.com/easyget"
+  reviews_url: "https://vk.com/easyget?w=wall-191811897_126"
