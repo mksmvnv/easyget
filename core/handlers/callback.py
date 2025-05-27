@@ -5,6 +5,7 @@ from aiogram.utils.markdown import hbold
 
 from utils.callback_data import Category, City, Pagination
 from utils.states import Calculation, Order
+
 from keyboards.inline import cancel_order
 from keyboards.reply import main_menu_keyboard
 
@@ -19,7 +20,7 @@ async def select_category_for_order(
     await state.update_data(name=callback_data.name)
     await state.set_state(Order.link)
     await call.message.answer(
-        f"Вставьте ссылку на товар из Poizon:", reply_markup=cancel_order()
+        "Вставьте ссылку на товар из Poizon:", reply_markup=cancel_order()
     )
     await call.answer()
 

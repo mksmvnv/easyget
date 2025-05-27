@@ -10,7 +10,7 @@ class City(CallbackData, prefix="city"):
     name: str
 
 
-class Pagination(CallbackData, prefix="pag"):
+class Pagination(CallbackData, prefix="page"):
     page: str
 
 

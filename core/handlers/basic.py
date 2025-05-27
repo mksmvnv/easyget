@@ -8,13 +8,16 @@ from aiogram.filters import CommandStart, Command
 from aiogram.utils.markdown import hbold, hcode, hitalic
 from aiogram.fsm.context import FSMContext
 
-from filters.admin import Admin
 from keyboards import inline
 from keyboards.reply import main_menu_keyboard
+
+from filters.admin import Admin
+
 from utils.states import Calculation, Order
 from utils.calculator import calculator
 from utils.currency import get_exchange_rates
 from utils.enums import Menu
+
 from data.config import settings
 
 
@@ -41,7 +44,7 @@ async def start_admin(message: Message) -> None:
 async def category_order(message: Message, state: FSMContext) -> None:
     await state.set_state(Order.city)
     await message.answer(
-        f"Выберите город доставки:", reply_markup=inline.city_keyboard()
+        "Выберите город доставки:", reply_markup=inline.city_keyboard()
     )
 
 
@@ -49,7 +52,7 @@ async def category_order(message: Message, state: FSMContext) -> None:
 async def category_calculator(message: Message, state: FSMContext) -> None:
     await state.set_state(Calculation.logistics)
     await message.answer(
-        f"Выберите категорию товара:", reply_markup=inline.category_keyboard()
+        "Выберите категорию товара:", reply_markup=inline.category_keyboard()
     )
 
 
@@ -57,7 +60,7 @@ async def category_calculator(message: Message, state: FSMContext) -> None:
 async def category_current_exchange_rate(message: Message) -> None:
     rate = await get_exchange_rates()
     await message.answer(
-        f'Актуальный курс CNY/RUB: {hcode(str(rate - 1) + "₽")}',
+        f"Актуальный курс CNY/RUB: {hcode(str(rate - 1) + '₽')}",
         reply_markup=inline.return_to_main_menu(),
     )
 
@@ -65,7 +68,7 @@ async def category_current_exchange_rate(message: Message) -> None:
 @router.message(F.text == Menu.reviews)
 async def category_reviews(message: Message) -> None:
     await message.answer(
-        f"Все отзывы по ссылке ниже.", reply_markup=inline.show_reviews()
+        "Все отзывы по ссылке ниже.", reply_markup=inline.show_reviews()
     )
 
 
@@ -86,7 +89,8 @@ async def category_about(message: Message) -> None:
 @router.message(F.text == Menu.faq)
 async def category_faq(message: Message):
     await message.answer(
-        f"Все инструкции и подробнее о нашей компании вы можете посмотреть в официальной группе по ссылке ниже.",
+        "Все инструкции и подробнее о нашей компании "
+        "вы можете посмотреть в официальной группе по ссылке ниже.",
         reply_markup=inline.show_all_info(),
     )
 
@@ -106,7 +110,7 @@ async def category_calculator_results(message: Message, state: FSMContext):
         calc_data = await state.get_data()
         amount = await calculator(price, calc_data.get("logistics"))
         await message.answer(
-            f'Итоговая цена товара: {hcode(str(int(amount)) + "₽")}\n',
+            f"Итоговая цена товара: {hcode(str(int(amount)) + '₽')}\n",
             reply_markup=inline.return_to_main_menu(),
         )
         await state.clear()
@@ -126,18 +130,18 @@ async def category_order_results(message: Message, bot: Bot, state: FSMContext):
         await message.answer(
             f"✅ {hbold(message.from_user.first_name)}, ваш заказ успешно оформлен!\n\n"
             f"Заказ №: {hcode(order_number)}\n"
-            f'Город: {hcode(order_data.get("name"))}\n'
+            f"Город: {hcode(order_data.get('name'))}\n"
             f"Логин: {hcode(message.from_user.username)}\n"
-            f'Ссылка на товар: {order_data.get("link")}\n\n'
-            f'{hitalic("💬 Ожидайте сообщения от нашего менеджера.")}',
+            f"Ссылка на товар: {order_data.get('link')}\n\n"
+            f"{hitalic('💬 Ожидайте сообщения от нашего менеджера.')}",
             reply_markup=inline.return_to_main_menu(),
         )
         order_info = (
             f"Заказ №: {hcode(order_number)}\n"
             f"Имя: {hcode(message.from_user.first_name)}\n"
             f"Логин: {hcode(message.from_user.username)}\n"
-            f'Город: {hcode(order_data.get("name"))}\n'
-            f'Ссылка на товар: {order_data.get("link")}'
+            f"Город: {hcode(order_data.get('name'))}\n"
+            f"Ссылка на товар: {order_data.get('link')}"
         )
         await bot.send_message(settings.personal.admin_id, order_info)
         await state.clear()
