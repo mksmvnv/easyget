@@ -15,6 +15,7 @@ async def main():
         level=logging.INFO,
         format="%(asctime)s - [%(levelname)s] - "
         "(%(filename)s).%(funcName)s(%(lineno)d) - %(message)s",
+        datefmt="%d-%m-%Y %I:%M:%S",
     )
 
     bot = Bot(
@@ -32,4 +33,4 @@ if __name__ == "__main__":
     try:
         asyncio.run(main())
     except KeyboardInterrupt:
-        print("Exit")
+        print("Kill")

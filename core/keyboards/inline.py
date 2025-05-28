@@ -1,5 +1,6 @@
 from aiogram.utils.keyboard import InlineKeyboardBuilder
 
+from utils.enums import InlineButton, CallbackInfo
 from utils.callback_data import Category, City, Pagination, Link
 
 from data.config import settings
@@ -8,19 +9,29 @@ from data.config import settings
 def category_keyboard():
     keyboard_builder = InlineKeyboardBuilder()
     keyboard_builder.button(
-        text="👟 Кроссовки",
-        callback_data=Category(name="Кроссовки", logistics=settings.logistics.sneakers),
+        text=InlineButton.sneakers,
+        callback_data=Category(
+            name=CallbackInfo.sneakers,
+            logistics=settings.logistics.sneakers,
+        ),
     )
     keyboard_builder.button(
-        text="🧥 Пуховики",
-        callback_data=Category(name="Пуховики", logistics=settings.logistics.jackets),
+        text=InlineButton.jackets,
+        callback_data=Category(
+            name=CallbackInfo.jackets,
+            logistics=settings.logistics.jackets,
+        ),
     )
     keyboard_builder.button(
-        text="💻 Другое",
-        callback_data=Category(name="Другое", logistics=settings.logistics.other),
+        text=InlineButton.other_category,
+        callback_data=Category(
+            name=CallbackInfo.other,
+            logistics=settings.logistics.other,
+        ),
     )
     keyboard_builder.button(
-        text="↩ Назад в главное меню", callback_data=Pagination(page="Главное меню")
+        text=InlineButton.return_to_main_menu,
+        callback_data=Pagination(page=CallbackInfo.main_menu),
     )
     keyboard_builder.adjust(1, 1, 1, 1)
     return keyboard_builder.as_markup()
@@ -28,11 +39,18 @@ def category_keyboard():
 
 def city_keyboard():
     keyboard_builder = InlineKeyboardBuilder()
-    keyboard_builder.button(text="🏢 Москва", callback_data=City(name="Москва"))
     keyboard_builder.button(
-        text="🏛 Санкт-Петербург", callback_data=City(name="Санкт-Петербург")
+        text=InlineButton.moscow,
+        callback_data=City(name=CallbackInfo.moscow),
     )
-    keyboard_builder.button(text="🏝 Другой город", callback_data=City(name="Другой"))
+    keyboard_builder.button(
+        text=InlineButton.spb,
+        callback_data=City(name=CallbackInfo.spb),
+    )
+    keyboard_builder.button(
+        text=InlineButton.other_city,
+        callback_data=City(name=CallbackInfo.other),
+    )
     keyboard_builder.adjust(1, 1, 1)
     return keyboard_builder.as_markup()
 
@@ -40,24 +58,28 @@ def city_keyboard():
 def show_reviews():
     keyboard_builder = InlineKeyboardBuilder()
     keyboard_builder.button(
-        text="🔎 Показать",
+        text=InlineButton.show,
         url=settings.links.reviews_url,
-        callback_data=Link(path="Отзывы"),
+        callback_data=Link(path=CallbackInfo.reviews),
     )
     keyboard_builder.button(
-        text="↩ Назад в главное меню", callback_data=Pagination(page="Главное меню")
+        text=InlineButton.return_to_main_menu,
+        callback_data=Pagination(page=CallbackInfo.main_menu),
     )
     keyboard_builder.adjust(1, 1)
     return keyboard_builder.as_markup()
 
 
-def show_all_info():
+def show_faq():
     keyboard_builder = InlineKeyboardBuilder()
     keyboard_builder.button(
-        text="🔎 Показать", url=settings.links.main_url, callback_data=Link(path="FAQ")
+        text=InlineButton.show,
+        url=settings.links.main_url,
+        callback_data=Link(path=CallbackInfo.faq),
     )
     keyboard_builder.button(
-        text="↩ Назад в главное меню", callback_data=Pagination(page="Главное меню")
+        text=InlineButton.return_to_main_menu,
+        callback_data=Pagination(page=CallbackInfo.main_menu),
     )
     keyboard_builder.adjust(1, 1)
     return keyboard_builder.as_markup()
@@ -66,7 +88,8 @@ def show_all_info():
 def cancel_order():
     keyboard_builder = InlineKeyboardBuilder()
     keyboard_builder.button(
-        text="🚫 Отменить заказ", callback_data=Pagination(page="Главное меню")
+        text=InlineButton.cancel,
+        callback_data=Pagination(page=CallbackInfo.main_menu),
     )
     keyboard_builder.adjust(1)
     return keyboard_builder.as_markup()
@@ -75,7 +98,8 @@ def cancel_order():
 def return_to_main_menu():
     keyboard_builder = InlineKeyboardBuilder()
     keyboard_builder.button(
-        text="↩ Назад в главное меню", callback_data=Pagination(page="Главное меню")
+        text=InlineButton.return_to_main_menu,
+        callback_data=Pagination(page=CallbackInfo.main_menu),
     )
     keyboard_builder.adjust(1)
     return keyboard_builder.as_markup()

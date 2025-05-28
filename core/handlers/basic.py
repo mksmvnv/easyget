@@ -16,7 +16,7 @@ from filters.admin import Admin
 from utils.states import Calculation, Order
 from utils.calculator import calculator
 from utils.currency import get_exchange_rates
-from utils.enums import Menu
+from utils.enums import MainButton
 
 from data.config import settings
 
@@ -25,7 +25,7 @@ router = Router()
 
 
 @router.message(CommandStart())
-async def start_user(message: Message) -> None:
+async def start_user(message: Message):
     await message.answer(
         f"👋 Привет, {hbold(message.from_user.first_name)}! Вот и главное меню.",
         reply_markup=main_menu_keyboard(),
@@ -33,31 +33,31 @@ async def start_user(message: Message) -> None:
 
 
 @router.message(Command("admin"), Admin(settings.personal.admin_id))
-async def start_admin(message: Message) -> None:
+async def start_admin(message: Message):
     await message.answer(
         f"💯 Привет, {hbold(message.from_user.first_name)}! Ты настоящий админ!",
         reply_markup=main_menu_keyboard(),
     )
 
 
-@router.message(F.text == Menu.order)
-async def category_order(message: Message, state: FSMContext) -> None:
+@router.message(F.text == MainButton.order)
+async def category_order(message: Message, state: FSMContext):
     await state.set_state(Order.city)
     await message.answer(
         "Выберите город доставки:", reply_markup=inline.city_keyboard()
     )
 
 
-@router.message(F.text == Menu.calculator)
-async def category_calculator(message: Message, state: FSMContext) -> None:
+@router.message(F.text == MainButton.calculator)
+async def category_calculator(message: Message, state: FSMContext):
     await state.set_state(Calculation.logistics)
     await message.answer(
         "Выберите категорию товара:", reply_markup=inline.category_keyboard()
     )
 
 
-@router.message(F.text == Menu.current_exchange_rate)
-async def category_current_exchange_rate(message: Message) -> None:
+@router.message(F.text == MainButton.current_exchange_rate)
+async def category_current_exchange_rate(message: Message):
     rate = await get_exchange_rates()
     await message.answer(
         f"Актуальный курс CNY/RUB: {hcode(str(rate - 1) + '₽')}",
@@ -65,15 +65,15 @@ async def category_current_exchange_rate(message: Message) -> None:
     )
 
 
-@router.message(F.text == Menu.reviews)
-async def category_reviews(message: Message) -> None:
+@router.message(F.text == MainButton.reviews)
+async def category_reviews(message: Message):
     await message.answer(
         "Все отзывы по ссылке ниже.", reply_markup=inline.show_reviews()
     )
 
 
-@router.message(F.text == Menu.about)
-async def category_about(message: Message) -> None:
+@router.message(F.text == MainButton.about)
+async def category_about(message: Message):
     await message.answer(
         "Кто мы?\n\n"
         "easyget. — это сервис доставки оригинальных товаров с площадки Poizon. "
@@ -86,16 +86,16 @@ async def category_about(message: Message) -> None:
     )
 
 
-@router.message(F.text == Menu.faq)
+@router.message(F.text == MainButton.faq)
 async def category_faq(message: Message):
     await message.answer(
         "Все инструкции и подробнее о нашей компании "
         "вы можете посмотреть в официальной группе по ссылке ниже.",
-        reply_markup=inline.show_all_info(),
+        reply_markup=inline.show_faq(),
     )
 
 
-@router.message(F.text == Menu.manager)
+@router.message(F.text == MainButton.manager)
 async def category_manager(message: Message):
     await message.answer(
         "Напишите нашему менеджеру Максиму @mksm_vnv, он ответит на все ваши вопросы 🫡",
