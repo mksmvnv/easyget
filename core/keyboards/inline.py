@@ -59,7 +59,7 @@ def show_reviews():
     keyboard_builder = InlineKeyboardBuilder()
     keyboard_builder.button(
         text=InlineButton.show,
-        url=settings.links.reviews_url,
+        url=settings.links.reviews,
         callback_data=Link(path=CallbackInfo.reviews),
     )
     keyboard_builder.button(
@@ -74,7 +74,7 @@ def show_faq():
     keyboard_builder = InlineKeyboardBuilder()
     keyboard_builder.button(
         text=InlineButton.show,
-        url=settings.links.main_url,
+        url=settings.links.home,
         callback_data=Link(path=CallbackInfo.faq),
     )
     keyboard_builder.button(

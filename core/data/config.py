@@ -21,8 +21,8 @@ class Logistics(BaseModel):
 
 class Links(BaseModel):
     api: str
-    main_url: str
-    reviews_url: str
+    home: str
+    reviews: str
 
 
 class Settings(BaseSettings):
