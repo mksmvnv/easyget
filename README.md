@@ -2,7 +2,7 @@
 
 Telegram bot for managing logistics of goods from China, including order placement and cost calculation.
 
-## 🚀 How to run?
+## How to run? 🚀
 
 **Prerequisites:**
 
