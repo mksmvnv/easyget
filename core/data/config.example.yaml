@@ -1,0 +1,20 @@
+personal:
+  # Your bot token
+  token: "abc123"
+  admin_id: 12345
+
+logistics:
+  # Prices (Rub)
+  sneakers: 50
+  jackets: 50
+  other: 50
+  china: 50
+  fee: 50
+
+links:
+  # Api for get current exchange rate
+  api: "https://test.ru"
+  # Home page your resource
+  home: "https://test.ru"
+  # Reviews page
+  reviews: "https://test.ru"
