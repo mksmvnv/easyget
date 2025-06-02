@@ -11,4 +11,4 @@ RUN pip install --no-cache-dir poetry && \
 
 COPY . .
 
-CMD ["python", "core/app.py"]
+CMD ["python3", "core/app.py"]
