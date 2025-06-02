@@ -1,25 +1,28 @@
-.PHONY: all lint build run stop logs clean
+.PHONY: all lint build run stop logs clean rebuild
 
-WORKDIR ?= core
-IMAGE 	?= easyget
-
+WORK_DIR	?= core
+IMAGE_NAME 	?= easyget
 
 all: lint build run
 
 lint:
-	@black ./$(WORKDIR)
+	@black ./$(WORK_DIR)
 
 build:
-	@docker build -t $(IMAGE) .
+	@docker build -t $(IMAGE_NAME) .
 
 run:
-	@docker run --rm -d --name $(IMAGE) $(IMAGE)
+	@docker run -d --name $(IMAGE_NAME) \
+	--restart unless-stopped $(IMAGE_NAME)
 
 stop:
-	@docker stop $(IMAGE)
+	@docker stop $(IMAGE_NAME)
 
 logs:
-	@docker logs -f $(IMAGE)
+	@docker logs -f $(IMAGE_NAME)
 
 clean:
-	@docker rmi $(IMAGE)
+	@docker rm -f $(IMAGE_NAME)
+	@docker rmi $(IMAGE_NAME)
+
+rebuild: stop clean all
